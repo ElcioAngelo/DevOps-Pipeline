@@ -3,15 +3,21 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                // 
+                //
+		sh '''
+			sudo mkdir DevOps-Pipeline 
+			cd DevOps-Pipeline
+                        git clone https://github.com/ElcioAngelo/DevOps-Pipeline.git
+			sudo docker compose up --build
+				
+	           '''  
             }
         }
         stage('Deploy') { 
             steps {
-                sh '''
-			sudo docker compose up --build 
-		''' 
-		a
+		sh '''
+			docker compose up -d 
+		'''
             }
         }
     }
