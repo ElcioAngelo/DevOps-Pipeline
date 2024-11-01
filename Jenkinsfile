@@ -11,6 +11,7 @@ pipeline {
                 sh '''
 			sudo docker compose up --build 
 		''' 
+		a
             }
         }
     }
