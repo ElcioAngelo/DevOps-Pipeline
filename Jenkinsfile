@@ -3,19 +3,13 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                //
+                script {
 		sh '''
-		cd DevOps-Pipeline
-		 docker compose up --build
-				
-	           '''  
-            }
-        }
-        stage('Deploy') { 
-            steps {
-		sh '''
-			docker compose up -d 
-		'''
+		docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+		docker compose up --d --build 
+		docker compose ps	
+	        '''  
+		}
             }
         }
     }
